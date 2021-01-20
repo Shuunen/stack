@@ -1,0 +1,39 @@
+{
+  "author": "Romain Racamier-Lafon <romain.racamier@gmail.com>",
+  "bin": "src/cli.js",
+  "bugs": "https://github.com/Shuunen/stack/issues",
+  "dependencies": {
+    "repo-check": "1.14.8",
+    "tsup": "3.11.0",
+    "xo": "0.37.1"
+  },
+  "description": "A cli to help me build web things, all in one",
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/Shuunen/stack",
+  "keywords": [
+    "cli",
+    "web"
+  ],
+  "license": "GPL-3.0",
+  "main": "src/cli.js",
+  "name": "shuunen-stack",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuunen/stack.git"
+  },
+  "scripts": {
+    "check": "repo-check",
+    "ci": "npm run lint && npm run check",
+    "lint": "xo --fix",
+    "postversion": "git push && git push --tags && npm publish",
+    "prebuild": "rm dist -rf",
+    "preversion": "npm run ci",
+    "start": "node .",
+    "test": "echo no tests yet",
+    "update": "npx npm-check-updates -u"
+  },
+  "version": "0.0.1"
+}
