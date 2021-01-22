@@ -13,7 +13,7 @@
   },
   "description": "A cli to help me build web things, all in one",
   "files": [
-    "dist"
+    "src"
   ],
   "homepage": "https://github.com/Shuunen/stack",
   "keywords": [
