@@ -5,8 +5,8 @@
   },
   "bugs": "https://github.com/Shuunen/stack/issues",
   "dependencies": {
-    "colorette": "^1.2.1",
-    "fs-extra": "^9.1.0",
+    "colorette": "1.2.1",
+    "fs-extra": "9.1.0",
     "repo-check": "1.14.8",
     "tsup": "3.11.0",
     "xo": "0.37.1"

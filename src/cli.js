@@ -5,6 +5,7 @@ const { readJSON } = require('fs-extra')
 const path = require('path')
 const { build } = require('./build')
 const { help } = require('./help')
+const { lint } = require('./lint')
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
@@ -13,6 +14,7 @@ async function start() {
   const pkg = await readJSON(path.join(__dirname, '../package.json'))
   console.log(`\nstack v${pkg.version} is starting...\n`)
   if (intent === 'build') return build(options)
+  if (intent === 'lint') return lint()
   return help(intent)
 }
 
