@@ -7,6 +7,10 @@
 
 > A cli to help me build web things, all in one
 
+## Todos
+
+- [ ] handle multiple build formats
+
 ## Thanks
 
 - [Github](https://github.com) : for all their great work year after year, pushing OSS forward
