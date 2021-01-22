@@ -12,7 +12,7 @@ async function start() {
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
   const pkg = await readJSON(path.join(__dirname, '../package.json'))
-  console.log(`\nstack v${pkg.version} is starting...\n`)
+  console.log(`stack v${pkg.version} is starting...\n`)
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
   return help(intent)
