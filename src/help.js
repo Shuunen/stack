@@ -1,12 +1,19 @@
-const { red } = require('colorette')
+const { cyan } = require('colorette')
+const { logger } = require('./logger')
 
-function help(intent) {
-  if (intent !== 'help') console.error(red(`intent not handled : ${intent}\n`))
-  console.log(`Here is how to use stack :\n
-  stack build src/my-file.ts
-  stack build src/my-file.ts --out-dir public/dist --format iife --minify
+const em = string => cyan(string)
 
-  stack help
+function help() {
+  logger.log(`\nHere is how to use stack :\n
+  stack ${em('build')} src/my-file.ts
+  stack ${em('build')} src/my-file.ts --out-dir public/dist --format iife --minify
+
+  stack ${em('dev')} can/be/a-file.ts
+  stack ${em('dev')} or/even/a-folder
+
+  stack ${em('lint')}
+
+  stack ${em('help')}
   `)
 }
 
