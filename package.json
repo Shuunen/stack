@@ -9,7 +9,7 @@
     "fs-extra": "9.1.0",
     "repo-check": "1.14.8",
     "tsup": "3.12.1",
-    "xo": "0.37.1"
+    "xo": "0.38.2"
   },
   "description": "A cli to help me build web things, all in one",
   "files": [
