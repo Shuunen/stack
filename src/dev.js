@@ -2,11 +2,10 @@ const { lstat } = require('fs').promises
 const { watch } = require('fs')
 const path = require('path')
 const { spawn } = require('child_process')
-const servor = require('servor/servor')
-const openBrowser = require('servor/utils/openBrowser')
 const { debounce } = require('shuutils')
 const { build } = require('./build')
 const { logger } = require('./logger')
+const { serve } = require('./serve')
 
 const execFile = file => {
   if (!file.includes('.js')) throw new Error('can\'t execute non-js files')
@@ -16,12 +15,6 @@ const execFile = file => {
 }
 
 const execFileDebounced = debounce(execFile, 200)
-
-async function serveFolder(folder) {
-  const { url } = await servor({ root: folder, reload: true })
-  logger.log(`Dev server is up : ${url}`)
-  openBrowser(url)
-}
 
 function watchJsFile(file) {
   execFileDebounced(file)
@@ -42,9 +35,9 @@ async function dev(options) {
   if (options === undefined || options.length === 0) throw new Error('can\'t dev without input')
   const input = options[0]
   const stat = await lstat(input)
-  if (stat.isDirectory()) return serveFolder(input)
+  if (stat.isDirectory()) return serve(input)
   if (stat.isFile()) return watchFile(input)
-  throw new Error('unhanlded dev case')
+  throw new Error('un-handled dev case')
 }
 
 exports.dev = dev
