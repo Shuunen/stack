@@ -10,10 +10,7 @@
 ## Todos
 
 - [ ] add repo-check to lint
-- [ ] add `stack serve` -> `servor`
 - [ ] add `stack update` -> `npm-check-updates -u`
-- [ ] add `stack test` -> `nyc mocha`
-- [ ] add `stack test:watch` -> `onchange --initial \"src/**/*\" \"tests/**/*\" -- npm test`
 
 ## Maydos
 
