@@ -8,15 +8,15 @@ class Logger {
   }
 
   log(...stuff) {
-    console.info(...stuff)
+    console.info(...stuff, '')
   }
 
   error(...stuff) {
-    console.error(...stuff.map(stuf => red(stuf)))
+    console.error(...stuff.map(thing => red(thing)), '')
   }
 
   success(...stuff) {
-    console.info(...stuff.map(stuf => green(stuf)))
+    console.info(...stuff.map(thing => green(thing)), '')
   }
 
   consoleLogProxy(...stuff) {

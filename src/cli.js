@@ -20,7 +20,7 @@ async function start() {
   if (intent === 'lint') return lint()
   if (intent === 'dev') return dev(options)
   if (intent === 'serve') return serve(options[0])
-  if (intent === 'test') return test(options[0])
+  if (intent === 'test') return test(options)
   if (intent === 'help') return help()
   throw new Error(`intent not handled : ${intent}\n`)
 }

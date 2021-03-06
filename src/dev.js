@@ -1,18 +1,10 @@
 const { lstat } = require('fs').promises
 const { watch } = require('fs')
 const path = require('path')
-const { spawn } = require('child_process')
 const { debounce } = require('shuutils')
 const { build } = require('./build')
-const { logger } = require('./logger')
 const { serve } = require('./serve')
-
-const execFile = file => {
-  if (!file.includes('.js')) throw new Error('can\'t execute non-js files')
-  const process = spawn('node', [file])
-  process.stdout.on('data', data => logger.log(String(data)))
-  process.stderr.on('data', data => logger.error(data))
-}
+const { execFile } = require('./utils')
 
 const execFileDebounced = debounce(execFile, 200)
 
