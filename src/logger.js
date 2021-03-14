@@ -1,26 +1,40 @@
 const { red, green } = require('colorette')
 
+const nothing = (stuff = []) => {
+  if (stuff.length === 0) return true
+  if (stuff.length === 1 && (typeof stuff[0] === 'string' && stuff[0].trim().length === 0)) return true
+  return false
+}
+
 class Logger {
   constructor() {
     this.log('in logger constructor')
     this.consoleLogAllowed = false
+    this.debugEnabled = false
     console.log = this.consoleLogProxy.bind(this)
   }
 
   log(...stuff) {
-    console.info(...stuff)
+    if (nothing(stuff)) return
+    console.info(...stuff, '')
   }
 
   error(...stuff) {
-    console.error(...stuff.map(stuf => red(stuf)))
+    if (nothing(stuff)) return
+    console.error(...stuff.map(thing => red(thing)), '')
   }
 
   success(...stuff) {
-    console.info(...stuff.map(stuf => green(stuf)))
+    if (nothing(stuff)) return
+    console.info(...stuff.map(thing => green(thing)), '')
   }
 
   consoleLogProxy(...stuff) {
     if (this.consoleLogAllowed) this.log(...stuff)
+  }
+
+  debug(...stuff) {
+    if (this.debugEnabled) this.log(...stuff)
   }
 }
 
