@@ -4,7 +4,7 @@ const openBrowser = require('servor/utils/openBrowser')
 
 async function serve(folder) {
   const { url } = await servor({ root: folder, reload: true })
-  logger.log(`Server is up : ${url}`)
+  logger.log(`server is up : ${url}`)
   openBrowser(url)
 }
 
