@@ -9,7 +9,8 @@
 
 ## Todos
 
-- [ ] add repo-check to lint
+- [ ] add tests to this repo
+- [ ] add repo-check to `stack lint`
 - [ ] add `stack update` -> `npm-check-updates -u`
 
 ## Maydos
@@ -19,6 +20,9 @@
 ## Thanks
 
 - [Github](https://github.com) : for all their great work year after year, pushing OSS forward
+- [Mocha](https://github.com/mochajs/mocha) : great test runner easy to setup & use
+- [Npm-run-all](https://github.com/mysticatea/npm-run-all) : to keep my npm scripts clean & readable
+- [Nyc](https://github.com/istanbuljs/nyc) : simple & effective cli for code coverage
 - [Repo-checker](https://github.com/Shuunen/repo-checker) : eslint cover /src code and this tool the rest ^^
 - [Shields.io](https://shields.io) : for the nice badges on top of this readme
 - [Travis-ci.com](https://travis-ci.com) : for providing free continuous deployments
