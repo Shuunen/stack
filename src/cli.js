@@ -16,11 +16,12 @@ async function start() {
   if (intent === '') intent = 'help'
   const pkg = await readJSON(path.join(__dirname, '../package.json'))
   logger.log(`stack v${pkg.version} is starting...`)
+  logger.debugEnabled = options.join().includes('--debug')
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
   if (intent === 'dev') return dev(options)
   if (intent === 'serve') return serve(options[0])
-  if (intent === 'test') return test(options)
+  if (intent === 'test') return test(options[0])
   if (intent === 'help') return help()
   throw new Error(`intent not handled : ${intent}\n`)
 }

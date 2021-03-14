@@ -10,6 +10,7 @@ class Logger {
   constructor() {
     this.log('in logger constructor')
     this.consoleLogAllowed = false
+    this.debugEnabled = false
     console.log = this.consoleLogProxy.bind(this)
   }
 
@@ -30,6 +31,10 @@ class Logger {
 
   consoleLogProxy(...stuff) {
     if (this.consoleLogAllowed) this.log(...stuff)
+  }
+
+  debug(...stuff) {
+    if (this.debugEnabled) this.log(...stuff)
   }
 }
 
