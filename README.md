@@ -11,7 +11,6 @@
 
 - [ ] add tests to this repo
 - [ ] use chokidar in the dev task
-- [ ] add repo-check to `stack lint`
 - [ ] add `stack update` -> `npm-check-updates -u`
 
 ## Maydos

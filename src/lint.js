@@ -1,13 +1,14 @@
 const { logger } = require('./logger')
+const { stackFolder } = require('./utils')
 const path = require('path')
 
 async function xo() {
-  const root = path.join(__dirname, '..')
-  const formatter = require(path.join(root, '/node_modules/eslint-formatter-pretty/index.js'))
+  const formatter = require(path.join(stackFolder, '/node_modules/eslint-formatter-pretty/index.js'))
   const target = process.cwd() + '\\**/*.*'
-  const rules = require(path.join(root, '.eslintrc.rules.js'))
-  const options = { fix: true, space: true, semicolon: false, rules, cwd: root, extension: ['ts', 'js'] }
-  const xo = require(path.join(root, '/node_modules/xo/index.js'))
+  const rules = require(path.join(stackFolder, '.eslintrc.rules.js'))
+  const ignores = ['**/*.global.js']
+  const options = { fix: true, space: true, semicolon: false, rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
+  const xo = require('xo')
   const report = await xo.lintFiles(target, options)
   xo.outputFixes(report) // apply fixes on the file system
   if ((report.warningCount + report.errorCount) === 0) return logger.success('no lint issues detected')
@@ -16,8 +17,14 @@ async function xo() {
   if (report.errorCount > 0) logger.error(report.errorCount, 'lint errors found')
 }
 
+async function repoCheck() {
+  logger.consoleLogAllowed = true
+  require('repo-check') // eslint-disable-line import/no-unassigned-import
+}
+
 async function lint() {
   await xo()
+  await repoCheck()
 }
 
 exports.lint = lint
