@@ -4,17 +4,18 @@ const { build } = require('./build')
 const { dev } = require('./dev')
 const { help } = require('./help')
 const { lint } = require('./lint')
-const { serve } = require('./serve')
-const { test } = require('./test')
 const { logger } = require('./logger')
 const { readJSON } = require('fs-extra')
+const { serve } = require('./serve')
+const { stackFolder } = require('./utils')
+const { test } = require('./test')
 const path = require('path')
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
-  const pkg = await readJSON(path.join(__dirname, '../package.json'))
+  const pkg = await readJSON(path.join(stackFolder, 'package.json'))
   logger.log(`stack v${pkg.version} is starting...`)
   logger.debugEnabled = options.join().includes('--debug')
   if (intent === 'build') return build(options)
