@@ -27,8 +27,11 @@ async function start() {
   throw new Error(`intent not handled : ${intent}\n`)
 }
 
-start().catch(error => {
+start().then(() => {
+  process.exit(0)
+}).catch(error => {
   logger.error(error.message)
   help()
+  process.exit(1)
 })
 
