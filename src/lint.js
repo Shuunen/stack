@@ -3,9 +3,9 @@ const { stackFolder } = require('./utils')
 const path = require('path')
 
 async function xo() {
-  const formatter = require(path.join(stackFolder, '/node_modules/eslint-formatter-pretty/index.js'))
+  const formatter = require('eslint-formatter-pretty')
   const target = process.cwd() + '\\**/*.*'
-  const rules = require(path.join(stackFolder, '.eslintrc.rules.js'))
+  const rules = require(path.join(process.cwd(), '.eslintrc.rules.js'))
   const ignores = ['**/*.global.js']
   const options = { fix: true, space: true, semicolon: false, rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
   const xo = require('xo')
