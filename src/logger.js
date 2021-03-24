@@ -8,7 +8,6 @@ const nothing = (stuff = []) => {
 
 class Logger {
   constructor() {
-    this.log('in logger constructor')
     this.consoleLogAllowed = false
     this.debugEnabled = false
     console.log = this.consoleLogProxy.bind(this)
