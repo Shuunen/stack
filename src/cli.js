@@ -29,9 +29,12 @@ async function start() {
 }
 
 start().then(() => {
+  logger.debug('stack ended normally')
   process.exit(0)
 }).catch(error => {
+  logger.debug('stack ended abnormally')
   logger.error(error.message)
+  logger.debug(error)
   help()
   process.exit(1)
 })
