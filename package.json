@@ -47,5 +47,5 @@
     "test": "echo no tests yet",
     "update": "npx npm-check-updates -u"
   },
-  "version": "0.3.0"
+  "version": "0.4.0"
 }
