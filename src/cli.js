@@ -13,11 +13,12 @@ const path = require('path')
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
+  const args = options.join()
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
   const pkg = await readJSON(path.join(stackFolder, 'package.json'))
   logger.log(`stack v${pkg.version} is starting...`)
-  logger.debugEnabled = options.join().includes('--debug')
+  logger.debugEnabled = args.includes('--debug') || args.includes('--verbose')
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
   if (intent === 'dev') return dev(options)
