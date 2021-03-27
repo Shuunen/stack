@@ -1,6 +1,7 @@
-const tsup = require('tsup').build
 const { logger } = require('./logger')
 const { serve } = require('./serve')
+const { untilUserStop } = require('./utils')
+const tsup = require('tsup').build
 
 async function build(options) {
   if (options === undefined || options.length === 0) throw new Error('can\'t build without input')
@@ -18,6 +19,7 @@ async function build(options) {
   const config = { outDir, minify, watch, sourcemap, entryPoints: [input], format: [format] }
   await tsup(config)
   logger.consoleLogAllowed = false
+  if (watch) await untilUserStop()
 }
 
 exports.build = build

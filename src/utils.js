@@ -19,4 +19,6 @@ exports.asyncExec = (cmd, showLog = true) => new Promise((resolve, reject) => {
   child.stderr.on('data', data => logger.error(data.trim()))
 })
 
+exports.untilUserStop = () => new Promise(() => {})
+
 exports.stackFolder = path.join(__dirname, '..')

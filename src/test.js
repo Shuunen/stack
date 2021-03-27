@@ -1,4 +1,4 @@
-const { asyncExec } = require('./utils')
+const { asyncExec, untilUserStop } = require('./utils')
 const { debounce } = require('shuutils')
 const { logger } = require('./logger')
 const { readJSON } = require('fs-extra')
@@ -16,10 +16,7 @@ async function startTests(cause = 'unknown') {
 
 const startTestsDebounced = debounce(startTests, 200)
 
-const watchFolder = async (folder = '') => new Promise(() => {
-  // trick to never stop waiting ^^'
-  watch(folder).on('all', (event, filename) => startTestsDebounced(`"${event}" detected on "${filename}"`))
-})
+const watchFolder = (folder = '') => watch(folder).on('all', (event, filename) => startTestsDebounced(`"${event}" detected on "${filename}"`))
 
 async function watchProject() {
   const { files } = await readJSON(path.join(target, 'package.json'))
@@ -27,7 +24,8 @@ async function watchProject() {
   files.forEach(item => folders.push(path.join(target, item, glob)))
   logger.log(folders.length, 'folders are being watched')
   logger.debug(folders)
-  return Promise.all(folders.map(folder => watchFolder(folder)))
+  folders.forEach(folder => watchFolder(folder))
+  await untilUserStop()
 }
 
 async function test(option = '') {
