@@ -12,7 +12,7 @@ function help() {
   stack ${em('dev')} can/be/a-file.ts
   stack ${em('dev')} or/even/a-folder
 
-  stack ${em('serve')}                  ${gray('# serve the current folder')}
+  stack ${em('serve')}                  ${gray('# start a http-server in the current folder')}
   stack ${em('serve')} specific/folder
 
   stack ${em('test')}                   ${gray('# will execute unit tests')}
