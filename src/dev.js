@@ -1,16 +1,17 @@
+const { build } = require('./build')
+const { debounce } = require('shuutils')
+const { execFile, untilUserStop } = require('./utils')
 const { lstat } = require('fs').promises
+const { serve } = require('./serve')
 const { watch } = require('fs')
 const path = require('path')
-const { debounce } = require('shuutils')
-const { build } = require('./build')
-const { serve } = require('./serve')
-const { execFile } = require('./utils')
 
 const execFileDebounced = debounce(execFile, 200)
 
-function watchJsFile(file) {
+async function watchJsFile(file) {
   execFileDebounced(file)
   watch(file, () => execFileDebounced(file))
+  await untilUserStop()
 }
 
 function watchJsFolder(folder) {

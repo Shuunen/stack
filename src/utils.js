@@ -7,7 +7,7 @@ exports.execFile = (...args) => {
   const exists = pathExistsSync(args[0])
   if (!exists) return logger.error('file does not exists :', args[0])
   const child = spawn('node', args)
-  child.stdout.on('data', data => logger.log(data.trim()))
+  child.stdout.on('data', data => logger.log(String(data).trim()))
   child.stderr.on('data', data => logger.error(data.trim()))
 }
 
