@@ -3,6 +3,7 @@
 const { build } = require('./build')
 const { dev } = require('./dev')
 const { help } = require('./help')
+const { info } = require('./info')
 const { lint } = require('./lint')
 const { logger } = require('./logger')
 const { readJSON } = require('fs-extra')
@@ -13,12 +14,15 @@ const path = require('path')
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
-  const args = options.join()
+  const args = options.join().trim()
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
   const pkg = await readJSON(path.join(stackFolder, 'package.json'))
-  logger.log(`stack v${pkg.version} is starting...`)
   logger.debugEnabled = args.includes('--debug') || args.includes('--verbose')
+  logger.debug(`intent : "${intent}"`)
+  logger.debug(`args : "${args}"`)
+  if (intent === '-v' || intent === 'info') return info(pkg)
+  logger.log(`stack v${pkg.version} is starting...`)
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
   if (intent === 'dev') return dev(options)
