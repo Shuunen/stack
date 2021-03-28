@@ -6,9 +6,10 @@ const { pathExistsSync } = require('fs-extra')
 async function xo() {
   const formatter = require('eslint-formatter-pretty')
   const target = process.cwd() + '\\**/*.*'
+  const baseRules = require(path.join(stackFolder, '.eslintrc.rules.js'))
   let customRules = path.join(process.cwd(), '.eslintrc.rules.js')
-  if (!pathExistsSync(customRules)) customRules = path.join(stackFolder, '.eslintrc.rules.js')
-  const rules = require(customRules)
+  customRules = pathExistsSync(customRules) ? require(customRules) : {}
+  const rules = Object.assign({}, baseRules, customRules)
   const ignores = ['**/*.global.js']
   const options = { fix: true, space: true, semicolon: false, rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
   const xo = require('xo')
