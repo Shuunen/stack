@@ -7,7 +7,7 @@ const path = require('path')
 
 const target = process.cwd()
 const glob = '**/*.{js,ts}'
-const folders = [path.join(target, 'tests', glob)] // these will be watched
+const folders = [path.join(target, 'tests', glob), path.join(target, 'test', glob)] // these will be watched
 
 async function startTests(cause = 'unknown') {
   logger.debug('tests starts because :', cause)
