@@ -11,7 +11,7 @@ async function xo() {
   customRules = pathExistsSync(customRules) ? require(customRules) : {}
   const rules = Object.assign({}, baseRules, customRules)
   const ignores = ['**/*.global.js']
-  const options = { fix: true, space: true, semicolon: false, rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
+  const options = { fix: true, space: true, semicolon: false, env: 'mocha', rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
   const xo = require('xo')
   const report = await xo.lintFiles(target, options)
   xo.outputFixes(report) // apply fixes on the file system
