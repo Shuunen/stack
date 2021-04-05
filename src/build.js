@@ -9,11 +9,14 @@ async function build(options) {
   options = options.join(' ')
   const outDir = (/--out-dir (\S*)/.exec(options) || [null, 'dist'])[1]
   const format = (/--format (\S*)/.exec(options) || [null, 'cjs'])[1]
-  const minify = options.includes('--minify')
+  let minify = options.includes('--minify')
   const dev = options.includes('--dev')
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
-  if (dev) serve(outDir)
+  if (dev) {
+    minify = false
+    serve(outDir)
+  }
   const verbose = !options.includes('--silent')
   if (verbose) logger.consoleLogAllowed = true
   const config = { outDir, minify, watch, sourcemap, entryPoints: [input], format: [format] }
