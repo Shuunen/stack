@@ -10,7 +10,7 @@ async function xo() {
   let customRules = path.join(process.cwd(), '.eslintrc.rules.js')
   customRules = pathExistsSync(customRules) ? require(customRules) : {}
   const rules = Object.assign({}, baseRules, customRules)
-  const ignores = ['**/*.global.js']
+  const ignores = ['dist', 'public', 'static']
   const options = { fix: true, space: true, semicolon: false, env: 'mocha', rules, ignores, cwd: stackFolder, extension: ['ts', 'js'] }
   const xo = require('xo')
   const report = await xo.lintFiles(target, options)
