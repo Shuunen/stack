@@ -14,7 +14,8 @@ async function build(options) {
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
   if (dev) serve(outDir)
-  const esbuild = path.join(process.cwd(), 'node_modules/esbuild/esbuild.exe')
+  const bin = process.platform === 'win32' ? 'esbuild.exe' : 'bin/esbuild'
+  const esbuild = path.join(process.cwd(), 'node_modules/esbuild', bin)
   let cmd = `${esbuild} ${input} --bundle --outdir=${outDir} --format=${format}`
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
