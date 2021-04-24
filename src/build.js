@@ -1,7 +1,7 @@
+const { asyncExec, untilUserStop } = require('./utils')
 const { logger } = require('./logger')
 const { serve } = require('./serve')
 const path = require('path')
-const { stackFolder, asyncExec, untilUserStop } = require('./utils')
 
 async function build(options) {
   if (options === undefined || options.length === 0) throw new Error('can\'t build without input')
@@ -14,7 +14,7 @@ async function build(options) {
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
   if (dev) serve(outDir)
-  const esbuild = path.join(stackFolder, 'node_modules/esbuild/esbuild.exe')
+  const esbuild = path.join(process.cwd(), 'node_modules/esbuild/esbuild.exe')
   let cmd = `${esbuild} ${input} --bundle --outdir=${outDir} --format=${format}`
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
