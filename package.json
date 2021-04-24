@@ -47,5 +47,5 @@
     "start": "node .",
     "update": "npm-check-updates -u"
   },
-  "version": "0.6.0"
+  "version": "0.6.1"
 }
