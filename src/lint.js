@@ -26,7 +26,7 @@ async function xo() {
 async function repoCheck() {
   logger.consoleLogAllowed = true
   const cli = path.join(process.cwd(), 'node_modules/repo-check/dist/cli.js')
-  const code = await asyncExec('node ' + cli)
+  const { code } = await asyncExec('node ' + cli)
   process.exit(code)
 }
 

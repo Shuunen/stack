@@ -3,6 +3,8 @@ const { pathExistsSync } = require('fs-extra')
 const { spawn, exec } = require('child_process')
 const path = require('path')
 
+const clean = output => output.replace(/\n$/, '')
+
 exports.execFile = (...args) => {
   const exists = pathExistsSync(args[0])
   if (!exists) return logger.error('file does not exists :', args[0])
@@ -11,12 +13,19 @@ exports.execFile = (...args) => {
   child.stderr.on('data', data => logger.error(data.trim()))
 }
 
-exports.asyncExec = (cmd, showLog = true) => new Promise((resolve, reject) => {
+exports.asyncExec = (cmd, showLog = true, showError = true) => new Promise((resolve, reject) => {
+  let out = ''
   const child = exec(cmd)
   child.addListener('error', (code, signal) => reject(new Error(`fail with code ${code} & signal ${signal}`)))
-  child.addListener('exit', code => resolve(code))
-  if (showLog) child.stdout.on('data', data => logger.log(data.trim()))
-  child.stderr.on('data', data => logger.error(data.trim()))
+  child.addListener('exit', code => resolve({ code, out }))
+  child.stdout.on('data', data => {
+    out += clean(data)
+    if (showLog) logger.log(clean(data))
+  })
+  child.stderr.on('data', data => {
+    out += clean(data)
+    if (showError) logger.error(clean(data))
+  })
 })
 
 exports.untilUserStop = () => new Promise(() => {})
