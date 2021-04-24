@@ -16,7 +16,7 @@
     "servor": "4.0.2",
     "shuutils": "4.4.0",
     "ts-node": "9.1.1",
-    "tsup": "4.9.1",
+    "esbuild": "0.11.14",
     "typescript": "4.2.4",
     "xo": "0.39.1"
   },
@@ -48,5 +48,5 @@
     "test": "echo no tests yet",
     "update": "npx npm-check-updates -u"
   },
-  "version": "0.5.3"
+  "version": "0.5.4"
 }
