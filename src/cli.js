@@ -10,6 +10,7 @@ const { readJSON } = require('fs-extra')
 const { serve } = require('./serve')
 const { stackFolder } = require('./utils')
 const { test } = require('./test')
+const { update } = require('./update')
 const path = require('path')
 
 async function start() {
@@ -28,6 +29,7 @@ async function start() {
   if (intent === 'dev') return dev(options)
   if (intent === 'serve') return serve(options[0])
   if (intent === 'test') return test(options[0])
+  if (intent === 'update') return update()
   if (intent === 'help') return help()
   throw new Error(`intent not handled : ${intent}\n`)
 }
