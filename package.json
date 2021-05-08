@@ -8,7 +8,7 @@
     "@types/mocha": "8.2.2",
     "chokidar": "3.5.1",
     "colorette": "1.2.2",
-    "esbuild": "0.11.19",
+    "esbuild": "0.11.20",
     "fs-extra": "10.0.0",
     "mocha": "8.4.0",
     "npm-check-updates": "11.5.10",
