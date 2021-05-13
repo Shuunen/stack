@@ -16,7 +16,7 @@
     "nyc": "15.1.0",
     "repo-check": "1.16.0",
     "servor": "4.0.2",
-    "shuutils": "4.4.0",
+    "shuutils": "4.5.1",
     "ts-node": "9.1.1",
     "typescript": "4.2.4",
     "xo": "0.39.1"
