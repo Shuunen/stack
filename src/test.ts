@@ -1,8 +1,8 @@
-import path from 'path'
 import { watch } from 'chokidar'
+import path from 'path' // eslint-disable-line import/order
 import { debounce } from 'shuutils'
-import { logger } from './logger.js'
-import { asyncExec, readJSON, untilUserStop } from './utils.js'
+import { logger } from './logger'
+import { asyncExec, readJSON, untilUserStop } from './utils'
 
 const target = process.cwd()
 const glob = '**/*.{js,ts}'
@@ -15,10 +15,11 @@ async function startTests(cause = 'unknown') {
 
 const startTestsDebounced = debounce(startTests, 200)
 
-const watchFolder = (folder = '') => watch(folder).on('all', (event, filename) => startTestsDebounced(`"${event}" detected on "${filename}"`))
+const watchFolder = (folder = '') => watch(folder).on('all', async (event, filename) => startTestsDebounced(`"${event}" detected on "${filename}"`))
 
 async function watchProject() {
-  const { files } = await readJSON(path.join(target, 'package.json'))
+  const pkg = await readJSON<packageJson>(path.join(target, 'package.json'))
+  const { files } = pkg
   if (files === undefined) return logger.log('no files section in package.json, only tests folder is being watched')
   files.forEach(item => folders.push(path.join(target, item, glob)))
   logger.log(folders.length, 'folders are being watched')

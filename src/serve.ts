@@ -1,12 +1,14 @@
-import servor from 'servor/servor.js'
-import openBrowser from 'servor/utils/openBrowser.js'
-import { logger } from './logger.js'
-import { untilUserStop } from './utils.js'
+import servor from 'servor/servor'
+import openBrowser from 'servor/utils/openBrowser'
+import { logger } from './logger'
+import { untilUserStop } from './utils'
 
-export const serve = async folder => {
-  const { url } = await servor({ root: folder, reload: true })
+export const serve = async (folder: string) => {
+  /* eslint-disable @typescript-eslint/no-unsafe-call */
+  const { url } = (await servor({ root: folder, reload: true })) as { url: string }
   logger.log(`server is up : ${url}`)
   openBrowser(url)
+  /* eslint-enable @typescript-eslint/no-unsafe-call */
   await untilUserStop()
 }
 

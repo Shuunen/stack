@@ -1,6 +1,6 @@
 import { green, red } from 'colorette'
 
-const nothing = (stuff = []) => {
+const nothing = (stuff: unknown[] = []) => {
   if (stuff.length === 0) return true
   if (stuff.length === 1 && (typeof stuff[0] === 'string' && stuff[0].trim().length === 0)) return true
   return false
@@ -11,29 +11,29 @@ class Logger {
   debugEnabled = false
 
   constructor() {
-    console.log = this.consoleLogProxy.bind(this)
+    console.log = this.consoleLogProxy.bind(this) // eslint-disable-line @typescript-eslint/no-unsafe-assignment
   }
 
-  log(...stuff) {
+  log(...stuff: unknown[]) {
     if (nothing(stuff)) return
     console.info(...stuff, '')
   }
 
-  error(...stuff) {
+  error(...stuff: unknown[]) {
     if (nothing(stuff)) return
-    console.error(...stuff.map(thing => red(thing)), '')
+    console.error(...stuff.map(thing => red(String(thing))), '')
   }
 
-  success(...stuff) {
+  success(...stuff: unknown[]) {
     if (nothing(stuff)) return
-    console.info(...stuff.map(thing => green(thing)), '')
+    console.info(...stuff.map(thing => green(String(thing))), '')
   }
 
-  consoleLogProxy(...stuff) {
+  consoleLogProxy(...stuff: unknown[]) {
     if (this.consoleLogAllowed) this.log(...stuff)
   }
 
-  debug(...stuff) {
+  debug(...stuff: unknown[]) {
     if (this.debugEnabled) this.log(...stuff)
   }
 }

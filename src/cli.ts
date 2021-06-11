@@ -1,23 +1,23 @@
 #!/usr/bin/env node
 
 import path from 'path'
-import { build } from './build.js'
-import { dev } from './dev.js'
-import { help } from './help.js'
-import { info } from './info.js'
-import { lint } from './lint.js'
-import { logger } from './logger.js'
-import { serve } from './serve.js'
-import { test } from './test.js'
-import { update } from './update.js'
-import { readJSON, stackFolder } from './utils.js'
+import { build } from './build'
+import { dev } from './dev'
+import { help } from './help'
+import { info } from './info'
+import { lint } from './lint'
+import { logger } from './logger'
+import { serve } from './serve'
+import { test } from './test'
+import { update } from './update'
+import { readJSON, stackFolder } from './utils'
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
   const args = options.join().trim()
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
-  const pkg = await readJSON(path.join(stackFolder, 'package.json'))
+  const pkg = await readJSON<packageJson>(path.join(stackFolder, 'package.json'))
   logger.debugEnabled = args.includes('--debug') || args.includes('--verbose')
   logger.debug(`intent : "${intent}"`)
   logger.debug(`args : "${args}"`)
@@ -36,7 +36,7 @@ async function start() {
 start().then(() => {
   logger.debug('stack ended normally')
   process.exit(0)
-}).catch(error => {
+}).catch((error: Error) => {
   logger.debug('stack ended abnormally')
   logger.error(error.message)
   logger.debug(error)

@@ -1,8 +1,8 @@
 import { execSync } from 'child_process'
-import { logger } from './logger.js'
-import { stackFolder } from './utils.js'
+import { logger } from './logger'
+import { stackFolder } from './utils'
 
-export function info(pkg) {
+export function info(pkg: packageJson) {
   logger.log(`  ......................................................................
   .   o   \\ o /  _ o        __|    \\ /     |__         o _  \\ o /   o
   .  /|\\    |     /\\   __\\o   \\o    |    o/     o/__   /\\     |    /|\\

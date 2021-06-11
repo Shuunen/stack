@@ -1,6 +1,6 @@
 import path from 'path'
-import { logger } from './logger.js'
-import { asyncExec } from './utils.js'
+import { logger } from './logger'
+import { asyncExec } from './utils'
 
 export async function lint() {
   logger.consoleLogAllowed = true

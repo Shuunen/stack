@@ -1,7 +1,7 @@
 import { cyan, gray } from 'colorette'
-import { logger } from './logger.js'
+import { logger } from './logger'
 
-const em = string => cyan(string)
+const em = (string: string) => cyan(string)
 
 export function help() {
   logger.log(`\nHow to use stack :\n

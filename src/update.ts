@@ -1,5 +1,5 @@
 import { run } from 'npm-check-updates'
-import { logger } from './logger.js'
+import { logger } from './logger'
 
 export async function update() {
   logger.consoleLogAllowed = true

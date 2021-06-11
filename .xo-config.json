@@ -65,9 +65,10 @@
       "error",
       {
         "allowList": {
-          "str": true,
+          "args": true,
           "dev": true,
-          "pkg": true
+          "pkg": true,
+          "str": true
         }
       }
     ]
