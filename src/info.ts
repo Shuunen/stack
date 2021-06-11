@@ -1,7 +1,8 @@
-const { logger } = require('./logger')
-const { execSync } = require('child_process')
+import { execSync } from 'child_process'
+import { logger } from './logger'
+import { stackFolder } from './utils'
 
-exports.info = function info(pkg) {
+export function info(pkg: packageJson) {
   logger.log(`  ......................................................................
   .   o   \\ o /  _ o        __|    \\ /     |__         o _  \\ o /   o
   .  /|\\    |     /\\   __\\o   \\o    |    o/     o/__   /\\     |    /|\\
@@ -16,7 +17,7 @@ exports.info = function info(pkg) {
   .  | \\  .      Mb     dM MM   8M   MM YM.    , MM 'Mb.
   .       .      P"Ybmmd"  'Mbmo'Moo9^Yo.YMbmd'.JMML. YA.
   .       .
-  .  __\\o .      - location     : ${__dirname}
+  .  __\\o .      - location     : ${stackFolder}
   . /) |  .      - working dir  : ${process.cwd()}
   .       .      - last commit  : ${execSync('git rev-parse --short HEAD').toString().trim()}
   . __|   .      - package name : ${pkg.name}

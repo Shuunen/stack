@@ -1,0 +1,78 @@
+{
+  "rules": {
+    "@typescript-eslint/brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": true
+      }
+    ],
+    "@typescript-eslint/comma-dangle": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/object-curly-spacing": "off",
+    "capitalized-comments": "off",
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "curly": [
+      "error",
+      "multi"
+    ],
+    "func-names": [
+      "error",
+      "always"
+    ],
+    "import/no-unassigned-import": "off",
+    "indent": [
+      "error",
+      2
+    ],
+    "lines-between-class-members": "off",
+    "max-statements-per-line": "off",
+    "no-console": "off",
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "padding-line-between-statements": "off",
+    "quote-props": [
+      "error",
+      "consistent-as-needed"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
+    "unicorn/no-array-for-each": "off",
+    "unicorn/no-process-exit": "off",
+    "unicorn/prefer-node-protocol": "off",
+    "unicorn/prefer-switch": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "allowList": {
+          "args": true,
+          "dev": true,
+          "pkg": true,
+          "str": true
+        }
+      }
+    ]
+  },
+  "semicolon": false,
+  "space": true
+}

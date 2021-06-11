@@ -1,9 +1,9 @@
-const { cyan, gray } = require('colorette')
-const { logger } = require('./logger')
+import { cyan, gray } from 'colorette'
+import { logger } from './logger'
 
-const em = string => cyan(string)
+const em = (string: string) => cyan(string)
 
-function help() {
+export function help() {
   logger.log(`\nHow to use stack :\n
   stack ${em('build')} src/my-file.ts
   stack ${em('build')} src/my-file.ts --out-dir public --format iife --minify
@@ -14,10 +14,10 @@ function help() {
   stack ${em('serve')} specific/folder
   stack ${em('test')}                   ${gray('# will execute unit tests')}
   stack ${em('test')} --watch           ${gray('# will execute unit tests')}
+  stack ${em('update')}                 ${gray('# will update all deps to latest')}
   stack ${em('lint')}                   ${gray('# will lint js & ts files + repo-check')}
   stack ${em('info')}                   ${gray('# show details about the app')}
   stack ${em('help')}                   ${gray('# bring this screen')}
   `)
 }
 
-exports.help = help
