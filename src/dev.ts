@@ -1,5 +1,5 @@
-import { lstat } from 'fs/promises'
 import { watch } from 'chokidar'
+import { lstat } from 'fs/promises'
 import { debounce } from 'shuutils'
 import { build } from './build'
 import { logger } from './logger'
@@ -15,11 +15,13 @@ async function watchJsFile(file: string) {
 }
 
 async function watchJsFolder(folder: string) {
+  logger.debug('watchJsFolder :', folder)
   watch(folder).on('all', async (_event, filename) => execFileDebounced(filename).catch(error => logger.error(error)))
   await untilUserStop()
 }
 
 async function watchFile(file: string) {
+  logger.debug('watchFile :', file)
   if (file.includes('.js')) return watchJsFile(file).catch(error => logger.error(error))
   build([file, '--watch --silent']).catch(error => logger.error(error))
   await watchJsFolder('dist')

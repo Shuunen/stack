@@ -3,11 +3,12 @@ import { logger } from './logger'
 import { serve } from './serve'
 import { asyncExec, untilUserStop } from './utils'
 
-export async function build(options: string[]) {
-  if (options === undefined || options.length === 0) throw new Error('can\'t build without input')
-  const input = options[0]
-  const outDirectory = String((/--out-dir (\S*)/.exec(options.join(' ')) ?? [null, 'dist'])[1])
-  const format = String((/--format (\S*)/.exec(options.join(' ')) ?? [null, 'cjs'])[1])
+export async function build(args: string[]) {
+  if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
+  const input = args[0]
+  const options = args.join(' ')
+  const outDirectory = String((/--out-dir (\S*)/.exec(options) ?? [null, 'dist'])[1])
+  const format = String((/--format (\S*)/.exec(options) ?? [null, 'cjs'])[1])
   const dev = options.includes('--dev')
   const minify = dev ? false : options.includes('--minify')
   const watch = dev || options.includes('--watch')
