@@ -47,5 +47,5 @@
     "test": "echo no tests yet",
     "update": "npm-check-updates -u"
   },
-  "version": "0.6.2"
+  "version": "0.7.0"
 }
