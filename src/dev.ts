@@ -1,5 +1,5 @@
-import { watch } from 'chokidar'
 import { lstat } from 'fs/promises'
+import { watch } from 'chokidar'
 import { debounce } from 'shuutils'
 import { build } from './build'
 import { logger } from './logger'

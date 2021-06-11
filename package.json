@@ -7,7 +7,6 @@
   "description": "A cli to help me build web things, all in one",
   "devDependencies": {
     "@types/jsonfile": "6.0.0",
-    "@types/mocha": "8.2.2",
     "chokidar": "3.5.1",
     "colorette": "1.2.2",
     "esbuild": "0.12.8",
