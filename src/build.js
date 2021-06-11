@@ -1,9 +1,9 @@
-const { asyncExec, untilUserStop } = require('./utils')
-const { logger } = require('./logger')
-const { serve } = require('./serve')
-const path = require('path')
+import path from 'path'
+import { logger } from './logger.js'
+import { serve } from './serve.js'
+import { asyncExec, untilUserStop } from './utils.js'
 
-async function build(options) {
+export async function build(options) {
   if (options === undefined || options.length === 0) throw new Error('can\'t build without input')
   const input = options[0]
   options = options.join(' ')
@@ -27,4 +27,3 @@ async function build(options) {
   else process.exit(code)
 }
 
-exports.build = build

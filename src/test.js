@@ -1,9 +1,8 @@
-const { asyncExec, untilUserStop } = require('./utils')
-const { debounce } = require('shuutils')
-const { logger } = require('./logger')
-const { readJSON } = require('fs-extra')
-const { watch } = require('chokidar')
-const path = require('path')
+import path from 'path'
+import { watch } from 'chokidar'
+import { debounce } from 'shuutils'
+import { logger } from './logger.js'
+import { asyncExec, readJSON, untilUserStop } from './utils.js'
 
 const target = process.cwd()
 const glob = '**/*.{js,ts}'
@@ -28,9 +27,8 @@ async function watchProject() {
   await untilUserStop()
 }
 
-async function test(option = '') {
+export async function test(option = '') {
   logger.log('starting unit tests & coverage with Mocha & Nyc...')
   await (option.includes('watch') ? watchProject() : startTestsDebounced('single run'))
 }
 
-exports.test = test

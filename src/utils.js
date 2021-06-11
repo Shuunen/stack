@@ -1,19 +1,23 @@
-const { logger } = require('./logger')
-const { pathExistsSync } = require('fs-extra')
-const { spawn, exec } = require('child_process')
-const path = require('path')
+import { exec, spawn } from 'child_process'
+import { existsSync } from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import jsonfile from 'jsonfile'
+import { logger } from './logger.js'
+
+const { readFile } = jsonfile
 
 const clean = output => output.replace(/\n$/, '')
 
-exports.execFile = (...args) => {
-  const exists = pathExistsSync(args[0])
+export const execFile = (...args) => {
+  const exists = existsSync(args[0])
   if (!exists) return logger.error('file does not exists :', args[0])
   const child = spawn('node', args)
   child.stdout.on('data', data => logger.log(String(data).trim()))
   child.stderr.on('data', data => logger.error(data.trim()))
 }
 
-exports.asyncExec = (cmd, showLog = true, showError = true) => new Promise((resolve, reject) => {
+export const asyncExec = (cmd, showLog = true, showError = true) => new Promise((resolve, reject) => {
   let out = ''
   const child = exec(cmd)
   child.addListener('error', (code, signal) => reject(new Error(`fail with code ${code} & signal ${signal}`)))
@@ -28,6 +32,8 @@ exports.asyncExec = (cmd, showLog = true, showError = true) => new Promise((reso
   })
 })
 
-exports.untilUserStop = () => new Promise(() => {})
+export const untilUserStop = () => new Promise(() => {})
 
-exports.stackFolder = path.join(__dirname, '..')
+export const stackFolder = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
+
+export const readJSON = file => readFile(file)

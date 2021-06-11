@@ -1,8 +1,9 @@
-const { logger } = require('./logger')
+import { run } from 'npm-check-updates'
+import { logger } from './logger.js'
 
-exports.update = async function update() {
+export async function update() {
   logger.consoleLogAllowed = true
-  const options = { concurrency: 8, errorLevel: 1, format: [], loglevel: 'warn', upgrade: true, args: [], cli: true }
-  await require('npm-check-updates').run(options)
+  const options = { concurrency: 8, errorLevel: 1, format: [], loglevel: 'info', upgrade: true, args: [], cli: true }
+  await run(options)
   logger.consoleLogAllowed = false
 }

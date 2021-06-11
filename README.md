@@ -8,7 +8,7 @@
 ## Todos
 
 - [ ] add tests to this repo
-- [ ] use chokidar in the dev task
+- [ ] update to latest xo when [vscode-linter-xo issue will be resolved](https://github.com/SamVerschueren/vscode-linter-xo/issues/91)
 
 ## Thanks
 

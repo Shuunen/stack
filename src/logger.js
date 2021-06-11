@@ -1,4 +1,4 @@
-const { red, green } = require('colorette')
+import { green, red } from 'colorette'
 
 const nothing = (stuff = []) => {
   if (stuff.length === 0) return true
@@ -37,4 +37,4 @@ class Logger {
   }
 }
 
-exports.logger = new Logger()
+export const logger = new Logger()

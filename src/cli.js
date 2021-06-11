@@ -1,17 +1,16 @@
 #!/usr/bin/env node
 
-const { build } = require('./build')
-const { dev } = require('./dev')
-const { help } = require('./help')
-const { info } = require('./info')
-const { lint } = require('./lint')
-const { logger } = require('./logger')
-const { readJSON } = require('fs-extra')
-const { serve } = require('./serve')
-const { stackFolder } = require('./utils')
-const { test } = require('./test')
-const { update } = require('./update')
-const path = require('path')
+import path from 'path'
+import { build } from './build.js'
+import { dev } from './dev.js'
+import { help } from './help.js'
+import { info } from './info.js'
+import { lint } from './lint.js'
+import { logger } from './logger.js'
+import { serve } from './serve.js'
+import { test } from './test.js'
+import { update } from './update.js'
+import { readJSON, stackFolder } from './utils.js'
 
 async function start() {
   const [command, ...options] = process.argv.slice(2)
