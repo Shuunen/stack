@@ -1,7 +1,7 @@
 {
   "author": "Romain Racamier-Lafon <romain.racamier@gmail.com>",
   "bin": {
-    "stack": "src/cli.js"
+    "stack": "dist/cli.js"
   },
   "bugs": "https://github.com/Shuunen/stack/issues",
   "description": "A cli to help me build web things, all in one",
@@ -21,7 +21,7 @@
     "xo": "0.40.2"
   },
   "files": [
-    "src"
+    "dist"
   ],
   "homepage": "https://github.com/Shuunen/stack",
   "keywords": [
@@ -39,12 +39,13 @@
   "scripts": {
     "build": "esbuild src/cli.ts --bundle --minify --outfile=dist/cli.js --platform=node --external:node-gyp --target=node14",
     "check": "repo-check",
-    "ci": "run-s build lint check",
+    "ci": "run-s build lint check test",
     "lint": "xo --fix",
-    "postversion": "git push && git push --tags && npm publish",
+    "postversion": "git push && git push --tags && npm run build && npm publish",
+    "prebuild": "rm dist -rf",
     "preversion": "npm run ci",
     "start": "node .",
-    "test": "xo",
+    "test": "echo no tests yet",
     "update": "npm-check-updates -u"
   },
   "version": "0.6.2"
