@@ -7,9 +7,10 @@ const nothing = (stuff = []) => {
 }
 
 class Logger {
+  consoleLogAllowed = false
+  debugEnabled = false
+
   constructor() {
-    this.consoleLogAllowed = false
-    this.debugEnabled = false
     console.log = this.consoleLogProxy.bind(this)
   }
 

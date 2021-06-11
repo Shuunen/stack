@@ -8,7 +8,6 @@
 ## Todos
 
 - [ ] add tests to this repo
-- [ ] update to latest xo when [vscode-linter-xo issue will be resolved](https://github.com/SamVerschueren/vscode-linter-xo/issues/91)
 
 ## Thanks
 

@@ -1,8 +1,8 @@
 import { exec, spawn } from 'child_process'
 import { existsSync } from 'fs'
+import jsonfile from 'jsonfile'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import jsonfile from 'jsonfile'
 import { logger } from './logger.js'
 
 const { readFile } = jsonfile
@@ -17,7 +17,7 @@ export const execFile = (...args) => {
   child.stderr.on('data', data => logger.error(data.trim()))
 }
 
-export const asyncExec = (cmd, showLog = true, showError = true) => new Promise((resolve, reject) => {
+export const asyncExec = (cmd, showLog = true, showError = true): Promise<{ code: number, out: string }> => new Promise((resolve, reject) => {
   let out = ''
   const child = exec(cmd)
   child.addListener('error', (code, signal) => reject(new Error(`fail with code ${code} & signal ${signal}`)))
@@ -32,7 +32,7 @@ export const asyncExec = (cmd, showLog = true, showError = true) => new Promise(
   })
 })
 
-export const untilUserStop = () => new Promise(() => {})
+export const untilUserStop = () => new Promise(() => { })
 
 export const stackFolder = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 
