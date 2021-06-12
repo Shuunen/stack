@@ -1,7 +1,7 @@
 import { watch } from 'chokidar'
 import { debounce } from 'shuutils'
 import { logger } from './logger'
-import { asyncExec, join, readJSON, untilUserStop } from './utils'
+import { asyncExec, join, readJSON, stackBin, untilUserStop } from './utils'
 
 const target = process.cwd()
 const glob = '**/*.{js,ts}'
@@ -9,7 +9,7 @@ const folders = [join(target, 'tests', glob), join(target, 'test', glob)] // the
 
 async function startTests (cause = 'unknown') {
   logger.debug('tests starts because :', cause)
-  return asyncExec('npx nyc mocha')
+  return asyncExec(`${stackBin}/nyc ${stackBin}/mocha`)
 }
 
 const startTestsDebounced = debounce(startTests, 200)
