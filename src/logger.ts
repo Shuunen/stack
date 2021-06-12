@@ -10,30 +10,31 @@ class Logger {
   consoleLogAllowed = false
   debugEnabled = false
 
-  constructor() {
-    console.log = this.consoleLogProxy.bind(this) // eslint-disable-line @typescript-eslint/no-unsafe-assignment
+  constructor () {
+    // eslint-disable-next-line unicorn/prefer-prototype-methods
+    console.log = this.consoleLogProxy.bind(this)
   }
 
-  log(...stuff: unknown[]) {
+  log (...stuff: unknown[]) {
     if (nothing(stuff)) return
     console.info(...stuff, '')
   }
 
-  error(...stuff: unknown[]) {
+  error (...stuff: unknown[]) {
     if (nothing(stuff)) return
     console.error(...stuff.map(thing => red(String(thing))), '')
   }
 
-  success(...stuff: unknown[]) {
+  success (...stuff: unknown[]) {
     if (nothing(stuff)) return
     console.info(...stuff.map(thing => green(String(thing))), '')
   }
 
-  consoleLogProxy(...stuff: unknown[]) {
+  consoleLogProxy (...stuff: unknown[]) {
     if (this.consoleLogAllowed) this.log(...stuff)
   }
 
-  debug(...stuff: unknown[]) {
+  debug (...stuff: unknown[]) {
     if (this.debugEnabled) this.log(...stuff)
   }
 }

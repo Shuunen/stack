@@ -7,9 +7,16 @@
   "description": "A cli to help me build web things, all in one",
   "devDependencies": {
     "@types/jsonfile": "6.0.0",
+    "@typescript-eslint/eslint-plugin": "4.26.1",
+    "@typescript-eslint/parser": "4.26.1",
     "chokidar": "3.5.1",
     "colorette": "1.2.2",
     "esbuild": "0.12.8",
+    "eslint": "7.28.0",
+    "eslint-plugin-html": "6.1.2",
+    "eslint-plugin-mocha": "9.0.0",
+    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-unicorn": "33.0.1",
     "jsonfile": "6.1.0",
     "mocha": "9.0.0",
     "npm-run-all": "4.1.5",
@@ -17,9 +24,8 @@
     "repo-check": "1.17.0",
     "servor": "4.0.2",
     "shuutils": "4.5.1",
-    "typescript": "4.3.2",
     "ts-node": "10.0.0",
-    "xo": "0.40.2"
+    "typescript": "4.3.2"
   },
   "files": [
     "dist"
@@ -41,7 +47,7 @@
     "build": "esbuild src/cli.ts --bundle --minify --outfile=dist/cli.js --platform=node --target=node14",
     "check": "repo-check",
     "ci": "run-s build lint check test",
-    "lint": "xo --fix",
+    "lint": "eslint --fix --ignore-path .gitignore --ext .js,.ts,.html .",
     "postversion": "git push && git push --tags && npm run build && npm publish",
     "prebuild": "rm dist -rf",
     "preversion": "npm run ci",

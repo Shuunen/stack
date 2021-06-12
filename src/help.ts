@@ -3,7 +3,7 @@ import { logger } from './logger'
 
 const em = (string: string) => cyan(string)
 
-export function help() {
+export function help (): void {
   logger.log(`\nHow to use stack :\n
   stack ${em('build')} src/my-file.ts
   stack ${em('build')} src/my-file.ts --out-dir public --format iife --minify

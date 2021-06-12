@@ -3,13 +3,13 @@ import { logger } from './logger'
 import { serve } from './serve'
 import { asyncExec, stackFolder, untilUserStop } from './utils'
 
-export async function build(args: string[]) {
+export async function build (args: string[]): Promise<void> {
   if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
   const input = args[0]
   const options = args.join(' ')
-  const outDirectory = String((/--out-dir[\s=](\S*)/.exec(options) ?? [null, 'dist'])[1])
-  const format = String((/--format[\s=](\S*)/.exec(options) ?? [null, 'cjs'])[1])
-  const platform = String((/--platform[\s=](\S*)/.exec(options) ?? [null, 'browser'])[1])
+  const outDirectory = String((/--out-dir[\s=](\S*)/.exec(options) ?? [undefined, 'dist'])[1])
+  const format = String((/--format[\s=](\S*)/.exec(options) ?? [undefined, 'cjs'])[1])
+  const platform = String((/--platform[\s=](\S*)/.exec(options) ?? [undefined, 'browser'])[1])
   const dev = options.includes('--dev')
   const minify = dev ? false : options.includes('--minify')
   const watch = dev || options.includes('--watch')

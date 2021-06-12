@@ -2,7 +2,7 @@ import { execSync } from 'child_process'
 import { logger } from './logger'
 import { stackFolder } from './utils'
 
-export function info(pkg: packageJson) {
+export function info (pkg: packageJson): void {
   logger.log(`  ......................................................................
   .   o   \\ o /  _ o        __|    \\ /     |__         o _  \\ o /   o
   .  /|\\    |     /\\   __\\o   \\o    |    o/     o/__   /\\     |    /|\\

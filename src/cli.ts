@@ -12,9 +12,9 @@ import { test } from './test'
 import { update } from './update'
 import { readJSON, stackFolder } from './utils'
 
-async function start() {
+async function start () {
   const [command, ...options] = process.argv.slice(2)
-  const args = options.join().trim()
+  const args = options.join('').trim()
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
   const pkg = await readJSON<packageJson>(path.join(stackFolder, 'package.json'))
@@ -33,10 +33,7 @@ async function start() {
   throw new Error(`intent not handled : ${intent}\n`)
 }
 
-start().then(() => {
-  logger.debug('stack ended normally')
-  process.exit(0)
-}).catch((error: Error) => {
+start().catch((error: Error) => {
   logger.debug('stack ended abnormally')
   logger.error(error.message)
   logger.debug(error)

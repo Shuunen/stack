@@ -1,14 +1,14 @@
 import { exec, spawn } from 'child_process'
 import { existsSync } from 'fs'
-import path from 'path'
 import jsonfile from 'jsonfile'
+import path from 'path'
 import { logger } from './logger'
 
 const { readFile } = jsonfile
 
 const clean = (output: string) => output.replace(/\n$/, '')
 
-export const execFile = (...args: string[]) => {
+export const execFile = (...args: string[]):void => {
   const exists = existsSync(args[0])
   if (!exists) return logger.error('file does not exists :', args[0])
   const child = spawn('node', args)
@@ -33,7 +33,7 @@ export const asyncExec = async (cmd: string, showLog = true, showError = true): 
   })
 })
 
-export const untilUserStop = async () => new Promise(() => { console.log('ninja') })
+export const untilUserStop = async (): Promise<void> => new Promise(() => { console.log('ninja') })
 
 export const stackFolder = path.join(__dirname, '..') // eslint-disable-line unicorn/prefer-module
 
