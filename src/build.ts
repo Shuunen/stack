@@ -1,22 +1,23 @@
 import path from 'path'
 import { logger } from './logger'
 import { serve } from './serve'
-import { asyncExec, untilUserStop } from './utils'
+import { asyncExec, stackFolder, untilUserStop } from './utils'
 
 export async function build(args: string[]) {
   if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
   const input = args[0]
   const options = args.join(' ')
-  const outDirectory = String((/--out-dir (\S*)/.exec(options) ?? [null, 'dist'])[1])
-  const format = String((/--format (\S*)/.exec(options) ?? [null, 'cjs'])[1])
+  const outDirectory = String((/--out-dir[\s=](\S*)/.exec(options) ?? [null, 'dist'])[1])
+  const format = String((/--format[\s=](\S*)/.exec(options) ?? [null, 'cjs'])[1])
+  const platform = String((/--platform[\s=](\S*)/.exec(options) ?? [null, 'browser'])[1])
   const dev = options.includes('--dev')
   const minify = dev ? false : options.includes('--minify')
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
   if (dev) serve(outDirectory).catch(error => logger.error(error))
   const bin = process.platform === 'win32' ? 'esbuild.exe' : 'bin/esbuild'
-  const esbuild = path.join(process.cwd(), 'node_modules/esbuild', bin)
-  let cmd = `${esbuild} ${input} --bundle --outdir=${outDirectory} --format=${format}`
+  const esbuild = path.join(stackFolder, 'node_modules/esbuild', bin)
+  let cmd = `${esbuild} ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
   if (watch) cmd += ' --watch'

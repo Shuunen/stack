@@ -6,6 +6,6 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "skipLibCheck": true,
-    "target": "es6"
+    "target": "ES6"
   }
 }
