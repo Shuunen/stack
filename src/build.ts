@@ -1,7 +1,6 @@
-import path from 'path'
 import { logger } from './logger'
 import { serve } from './serve'
-import { asyncExec, stackFolder, untilUserStop } from './utils'
+import { asyncExec, stackBin, untilUserStop } from './utils'
 
 export async function build (args: string[]): Promise<void> {
   if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
@@ -15,9 +14,7 @@ export async function build (args: string[]): Promise<void> {
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
   if (dev) serve(outDirectory).catch(error => logger.error(error))
-  const bin = process.platform === 'win32' ? 'esbuild.exe' : 'bin/esbuild'
-  const esbuild = path.join(stackFolder, 'node_modules/esbuild', bin)
-  let cmd = `${esbuild} ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
+  let cmd = `${stackBin}/esbuild ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
   if (watch) cmd += ' --watch'

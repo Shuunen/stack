@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import path from 'path'
 import { build } from './build'
 import { dev } from './dev'
 import { help } from './help'
@@ -10,19 +9,18 @@ import { logger } from './logger'
 import { serve } from './serve'
 import { test } from './test'
 import { update } from './update'
-import { readJSON, stackFolder } from './utils'
+import packageJson from '../package.json'
 
 async function start () {
   const [command, ...options] = process.argv.slice(2)
   const args = options.join('').trim()
   let intent = command ? command.replace('--', '') : ''
   if (intent === '') intent = 'help'
-  const pkg = await readJSON<packageJson>(path.join(stackFolder, 'package.json'))
   logger.debugEnabled = args.includes('--debug') || args.includes('--verbose')
   logger.debug(`intent : "${intent}"`)
   logger.debug(`args : "${args}"`)
-  if (intent === '-v' || intent === 'info') return info(pkg)
-  logger.log(`stack v${pkg.version} is starting...`)
+  if (intent === '-v' || intent === 'info') return info(packageJson)
+  logger.log(`stack v${packageJson.version} is starting...`)
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
   if (intent === 'dev') return dev(options)
