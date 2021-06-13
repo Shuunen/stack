@@ -43,6 +43,6 @@ export const untilUserStop = async (): Promise<void> => new Promise(() => { cons
 
 export const stackFolder = join(__dirname, '..') // eslint-disable-line unicorn/prefer-module
 
-export const stackBin = join(stackFolder, 'node_modules/.bin')
+export const nodeBin = join(process.cwd(), 'node_modules/.bin')
 
 export const readJSON = async <T> (file: string): Promise<T> => readFile(file) // eslint-disable-line @typescript-eslint/no-unsafe-return

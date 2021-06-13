@@ -1,6 +1,6 @@
 import { logger } from './logger'
 import { serve } from './serve'
-import { asyncExec, join, stackFolder, untilUserStop } from './utils'
+import { asyncExec, nodeBin, untilUserStop } from './utils'
 
 export async function build (args: string[]): Promise<void> {
   if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
@@ -14,9 +14,7 @@ export async function build (args: string[]): Promise<void> {
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
   if (dev) serve(outDirectory).catch(error => logger.error(error))
-  const bin = process.platform === 'win32' ? 'esbuild.exe' : 'bin/esbuild' // needed for ubuntu github-ci even if it works on normal ubunutu... -.-''
-  const esbuild = join(stackFolder, 'node_modules/esbuild', bin)
-  let cmd = `${esbuild} ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
+  let cmd = `${nodeBin}/esbuild ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
   if (watch) cmd += ' --watch'
