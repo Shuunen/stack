@@ -23,7 +23,10 @@ export const asyncExec = async (cmd: string, showLog = true, showError = true): 
   logger.debug('executing :', cmd)
   const child = exec(cmd)
   child.addListener('error', (code: number, signal: number) => reject(new Error(`fail with code ${code} & signal ${signal}`)))
-  child.addListener('exit', (code: number) => resolve({ code, out }))
+  child.addListener('exit', (code: number) => {
+    logger.debug('exec ended with :', { code, out })
+    return resolve({ code, out })
+  })
   child.stdout?.on('data', data => {
     const cleanString = clean(String(data))
     out += cleanString
