@@ -43,7 +43,7 @@
       "error",
       {
         "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
+        "varsIgnorePattern": "^(_|global)"
       }
     ],
     "@typescript-eslint/object-curly-spacing": "off",
