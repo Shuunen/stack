@@ -3,6 +3,6 @@
     "editorconfig.editorconfig",
     "davidanson.vscode-markdownlint",
     "yzhang.markdown-all-in-one",
-    "samverschueren.linter-xo"
+    "dbaeumer.vscode-eslint"
   ]
 }
