@@ -30,7 +30,8 @@
     "typescript": "4.3.2"
   },
   "files": [
-    "dist"
+    "dist",
+    ".eslintrc.json"
   ],
   "homepage": "https://github.com/Shuunen/stack",
   "keywords": [
