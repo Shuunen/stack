@@ -2,7 +2,6 @@ import { logger } from './logger'
 import { asyncExec, join, stackBin, stackFolder } from './utils'
 
 export async function lint (): Promise<void> {
-  logger.consoleLogAllowed = true
   const config = join(stackFolder, '.eslintrc.json')
   let result = await asyncExec(`${stackBin}/eslint --fix --ignore-path .gitignore --config=${config} --ext .js,.ts,.html .`)
   logger.debug('eslint exited with code', result.code)

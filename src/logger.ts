@@ -7,17 +7,11 @@ const nothing = (stuff: unknown[] = []) => {
 }
 
 class Logger {
-  consoleLogAllowed = false
   debugEnabled = false
-
-  constructor () {
-    // eslint-disable-next-line unicorn/prefer-prototype-methods
-    console.log = this.consoleLogProxy.bind(this)
-  }
 
   log (...stuff: unknown[]) {
     if (nothing(stuff)) return
-    console.info(...stuff, '')
+    console.log(...stuff, '')
   }
 
   error (...stuff: unknown[]) {
@@ -27,11 +21,7 @@ class Logger {
 
   success (...stuff: unknown[]) {
     if (nothing(stuff)) return
-    console.info(...stuff.map(thing => green(String(thing))), '')
-  }
-
-  consoleLogProxy (...stuff: unknown[]) {
-    if (this.consoleLogAllowed) this.log(...stuff)
+    console.log(...stuff.map(thing => green(String(thing))), '')
   }
 
   debug (...stuff: unknown[]) {
