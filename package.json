@@ -5,10 +5,12 @@
   },
   "bugs": "https://github.com/Shuunen/stack/issues",
   "description": "A cli to help me build web things, all in one",
-  "devDependencies": {
+  "dependencies": {
+    "@types/assert": "1.5.4",
     "@types/jsonfile": "6.0.0",
     "@typescript-eslint/eslint-plugin": "4.26.1",
     "@typescript-eslint/parser": "4.26.1",
+    "assert": "2.0.0",
     "chokidar": "3.5.1",
     "colorette": "1.2.2",
     "esbuild": "0.12.8",
