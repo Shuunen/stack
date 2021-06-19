@@ -1,5 +1,6 @@
 {
   "env": {
+    "browser": true,
     "es6": true,
     "node": true
   },
@@ -9,6 +10,24 @@
     "plugin:mocha/recommended",
     "plugin:promise/recommended",
     "plugin:unicorn/recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "tests/*"
+      ],
+      "rules": {
+        "func-names": "off"
+      }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -22,12 +41,7 @@
     "promise",
     "unicorn"
   ],
-  "root": true,
   "rules": {
-    "space-before-function-paren": [
-      "error",
-      "always"
-    ],
     "@typescript-eslint/brace-style": [
       "error",
       "1tbs",
@@ -35,10 +49,6 @@
         "allowSingleLine": true
       }
     ],
-    "@typescript-eslint/comma-dangle": "off",
-    "@typescript-eslint/consistent-type-assertions": "off",
-    "@typescript-eslint/member-delimiter-style": "off",
-    "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -46,7 +56,6 @@
         "varsIgnorePattern": "^(_|global)"
       }
     ],
-    "@typescript-eslint/object-curly-spacing": "off",
     "capitalized-comments": "off",
     "comma-dangle": [
       "error",
@@ -85,11 +94,15 @@
       "error",
       "never"
     ],
+    "space-before-function-paren": [
+      "error",
+      "always"
+    ],
     "unicorn/no-array-for-each": "off",
     "unicorn/no-process-exit": "off",
+    "unicorn/prefer-module": "off",
     "unicorn/prefer-node-protocol": "off",
     "unicorn/prefer-switch": "off",
-    "unicorn/prefer-module": "off",
     "unicorn/prevent-abbreviations": [
       "error",
       {
@@ -101,15 +114,5 @@
         }
       }
     ]
-  },
-  "overrides": [
-    {
-      "files": [
-        "tests/*"
-      ],
-      "rules": {
-        "func-names": "off"
-      }
-    }
-  ]
+  }
 }
