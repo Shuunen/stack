@@ -58,5 +58,5 @@
     "test": "echo no tests yet",
     "update": "npx npm-check-updates -u"
   },
-  "version": "0.9.5"
+  "version": "0.9.6"
 }
