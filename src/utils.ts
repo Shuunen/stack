@@ -39,7 +39,7 @@ export const asyncExec = async (cmd: string, showLog = true, showError = true): 
   })
 })
 
-export const untilUserStop = async (): Promise<void> => new Promise(() => { console.log('ninja') })
+export const untilUserStop = async (): Promise<void> => new Promise(() => { console.log('Press Ctrl+C to stop...') })
 
 export const stackFolder = join(__dirname, '..') // eslint-disable-line unicorn/prefer-module
 
