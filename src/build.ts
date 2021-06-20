@@ -13,8 +13,9 @@ export async function build (args: string[]): Promise<void> {
   const minify = dev ? false : options.includes('--minify')
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
+  const global = (options.includes('--no-global') || platform !== 'browser') ? '' : '--define:global=window'
   if (dev) serve(outDirectory).catch(error => logger.error(error))
-  let cmd = `${nodeBin}/esbuild ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform}`
+  let cmd = `${nodeBin}/esbuild ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform} ${global}`.trim()
   if (sourcemap) cmd += ' --sourcemap'
   if (minify) cmd += ' --minify'
   if (watch) cmd += ' --watch'
