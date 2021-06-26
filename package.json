@@ -50,14 +50,14 @@
     "url": "git+https://github.com/Shuunen/stack.git"
   },
   "scripts": {
-    "build": "esbuild src/cli.ts --bundle --minify --outfile=dist/cli.js --platform=node --target=node14 --external:tailwindcss --external:esbuild --metafile=meta.json",
+    "build": "ts-node bin/build",
     "check": "repo-check",
     "ci": "run-s build lint check test",
     "lint": "eslint --fix --ignore-path .gitignore --ext .js,.ts,.html .",
     "postversion": "git push && git push --tags && npm run build && npm publish",
     "prebuild": "rm dist -rf",
     "preversion": "npm run ci",
-    "start": "ts-node --transpile-only src/cli.ts",
+    "start": "ts-node src/cli",
     "test": "echo no tests yet",
     "update": "npx npm-check-updates -u"
   },
