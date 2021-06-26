@@ -1,23 +1,32 @@
-import { cyan, gray } from 'colorette'
+import { cyan, gray, yellow } from 'colorette'
 import { logger } from './logger'
 
-const em = (string: string) => cyan(string)
+const em1 = (string: string) => cyan(string)
+const em2 = (string: string) => yellow(string)
+const dim = (string: string) => gray(string)
+const line = dim('-------------------------------------------------------------------------------')
 
 export function help (): void {
   logger.log(`\nHow to use stack :\n
-  stack ${em('build')} src/my-file.ts
-  stack ${em('build')} src/my-file.ts --out-dir public --format iife --minify
-  ${gray('pro tip : great with a "dev": "npm run build -- --dev", task ^^')}
-  stack ${em('dev')} can/be/a-file.ts
-  stack ${em('dev')} or/even/a-folder
-  stack ${em('serve')}                  ${gray('# start a http-server in the current folder')}
-  stack ${em('serve')} specific/folder
-  stack ${em('test')}                   ${gray('# will execute unit tests')}
-  stack ${em('test')} --watch           ${gray('# will execute unit tests')}
-  stack ${em('update')}                 ${gray('# will update all deps to latest')}
-  stack ${em('lint')}                   ${gray('# will lint js & ts files + repo-check')}
-  stack ${em('info')}                   ${gray('# show details about the app')}
-  stack ${em('help')}                   ${gray('# bring this screen')}
+  stack ${em1('build')}                 ${dim('# equivalent to the line below')}
+  stack ${em1('build')} src/index.ts --out-dir public --format iife --platform browser
+  stack ${em1('build')} --dev           ${dim('# build, watch & open a web server locally with live reload and source maps')}
+  stack ${em1('build')} src/file.ts --platform node --minify --watch --run
+  ${line}
+  stack ${em2('dev')}                   ${dim('# alias for : build --dev')}
+  stack ${em2('dev')} src/file.ts       ${dim('# alias for : build src/file.ts --watch --run')}
+  stack ${em2('dev')} my/folder         ${dim('# alias for : serve my/folder')}
+  ${line}
+  stack ${em1('serve')}                 ${dim('# start a http-server in the current folder')}
+  stack ${em1('serve')} my/folder       ${dim('# open a web server locally with live reload')}
+  ${line}
+  stack ${em2('test')}                  ${dim('# execute unit tests')}
+  stack ${em2('test')} --watch          ${dim('# execute unit tests')}
+  ${line}
+  stack ${em1('update')}                ${dim('# update all deps to latest')}
+  stack ${em2('lint')}                  ${dim('# lint js & ts files + repo-check')}
+  stack ${em1('info')}                  ${dim('# show details about stack app')}
+  stack ${em2('help')}                  ${dim('# bring this screen')}
   `)
 }
 

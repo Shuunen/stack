@@ -6,6 +6,8 @@
 *.tgz
 coverage
 dist
+meta.json
 node_modules
 package-lock.json
+public
 sample.*

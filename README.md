@@ -25,3 +25,4 @@
 - [Repo-checker](https://github.com/Shuunen/repo-checker) : eslint cover /src code and this tool the rest ^^
 - [Servor](https://github.com/lukejacksonn/servor) : dependency free dev server for single page app development
 - [Shields.io](https://shields.io) : for the nice badges on top of this readme
+- [TailwindCss](https://tailwindcss.com) : awesome lib to produce maintainable style

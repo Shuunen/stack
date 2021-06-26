@@ -1,28 +1,46 @@
+import postCssPlugin from '@deanc/esbuild-plugin-postcss'
+import { build as esbuild, Format, Platform } from 'esbuild'
+import tailwindcss from 'tailwindcss'
+import { runPlugin } from './build-run-plugin'
 import { logger } from './logger'
 import { serve } from './serve'
-import { asyncExec, nodeBin, untilUserStop } from './utils'
+import { exitWithError, untilUserStop } from './utils'
 
 export async function build (args: string[]): Promise<void> {
-  if (args === undefined || args.length === 0) throw new Error('can\'t build without input')
-  const input = args[0]
+
+  const input = /([\w-]+)\.[jt]s$/.test(args[0]) ? args[0] : 'src/index.ts'
   const options = args.join(' ')
-  const outDirectory = String((/--out-dir[\s=](\S*)/.exec(options) ?? [undefined, 'dist'])[1])
-  const format = String((/--format[\s=](\S*)/.exec(options) ?? [undefined, 'cjs'])[1])
-  const platform = String((/--platform[\s=](\S*)/.exec(options) ?? [undefined, 'browser'])[1])
+  const platform = String((/--platform[\s=](\S*)/.exec(options) ?? [undefined, 'browser'])[1]) as Platform
+  const isBrowser = platform === 'browser'
+  const outDirectory = String((/--out-dir[\s=](\S*)/.exec(options) ?? [undefined, isBrowser ? 'public' : 'dist'])[1])
+  const format = String((/--format[\s=](\S*)/.exec(options) ?? [undefined, isBrowser ? 'iife' : 'cjs'])[1]) as Format
   const dev = options.includes('--dev')
   const minify = dev ? false : options.includes('--minify')
   const watch = dev || options.includes('--watch')
   const sourcemap = dev || options.includes('--sourcemap')
-  const global = (options.includes('--no-global') || platform !== 'browser') ? '' : '--define:global=window'
+  const define = (options.includes('--no-global') || isBrowser) ? { global: 'window' } : {}
+
+  const plugins = [postCssPlugin({ plugins: [tailwindcss] })]
+  if (options.includes('--run')) plugins.push(runPlugin)
+
   if (dev) serve(outDirectory).catch(error => logger.error(error))
-  let cmd = `${nodeBin}/esbuild ${input} --bundle --outdir=${outDirectory} --format=${format} --platform=${platform} ${global}`.trim()
-  if (sourcemap) cmd += ' --sourcemap'
-  if (minify) cmd += ' --minify'
-  if (watch) cmd += ' --watch'
-  logger.debug('cmd ?', cmd)
-  const { code, out } = await asyncExec(cmd, false, false)
-  logger.log(out)
-  if (watch) await untilUserStop()
-  else process.exit(code)
+
+  const status = await esbuild({
+    bundle: true,
+    define,
+    entryPoints: [input],
+    format,
+    minify,
+    outdir: outDirectory,
+    platform,
+    plugins,
+    sourcemap,
+    watch,
+  })
+
+  if (status.errors.length > 0) exitWithError(status.errors)
+  if (status.warnings.length > 0) logger.log('compilation ended with warnings :', status.warnings)
+  else if (watch && !dev) await untilUserStop()
+  else logger.log('\ncompilation ended successfully')
 }
 
