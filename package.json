@@ -54,7 +54,7 @@
     "postversion": "git push && git push --tags && npm run build && npm publish",
     "prebuild": "rm dist -rf",
     "preversion": "npm run ci",
-    "start": "node .",
+    "start": "ts-node --transpile-only src/cli.ts",
     "test": "echo no tests yet",
     "update": "npx npm-check-updates -u"
   },
