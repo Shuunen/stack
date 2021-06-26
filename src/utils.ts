@@ -1,4 +1,5 @@
 import { exec, spawn } from 'child_process'
+import { Message } from 'esbuild'
 import { existsSync } from 'fs'
 import jsonfile from 'jsonfile'
 import path from 'path'
@@ -39,10 +40,15 @@ export const asyncExec = async (cmd: string, showLog = true, showError = true): 
   })
 })
 
-export const untilUserStop = async (): Promise<void> => new Promise(() => { console.log('Press Ctrl+C to stop...') })
+export const untilUserStop = async (): Promise<void> => new Promise(() => { console.log('Press Ctrl+C to stop...\n') })
 
 export const stackFolder = join(__dirname, '..') // eslint-disable-line unicorn/prefer-module
 
 export const nodeBin = join(process.cwd(), 'node_modules/.bin')
 
 export const readJSON = async <T> (file: string): Promise<T> => readFile(file) // eslint-disable-line @typescript-eslint/no-unsafe-return
+
+export const exitWithError = (error: Error | string | Message[]): void => {
+  logger.error(error)
+  process.exit(1)
+}
