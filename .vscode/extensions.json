@@ -3,6 +3,7 @@
     "editorconfig.editorconfig",
     "davidanson.vscode-markdownlint",
     "yzhang.markdown-all-in-one",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "bradlc.vscode-tailwindcss"
   ]
 }

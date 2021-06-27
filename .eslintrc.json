@@ -108,7 +108,6 @@
       {
         "allowList": {
           "args": true,
-          "dev": true,
           "pkg": true,
           "str": true
         }
