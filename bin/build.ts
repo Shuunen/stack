@@ -1,4 +1,5 @@
 import { build as esbuild } from 'esbuild'
+import { writeFileSync } from 'jsonfile'
 import pkg from '../package.json'
 
 const makeAllPackagesExternalPlugin = {
@@ -24,8 +25,9 @@ const build = async () => {
     console.error(status.errors)
     process.exit(1)
   }
-  if (status.warnings.length > 0) console.log('\ncompilation ended with warnings :', status.warnings)
-  else console.log('\ncompilation ended successfully')
+  if (status.warnings.length > 0) return console.log('\ncompilation ended with warnings :', status.warnings)
+  console.log('\ncompilation ended successfully')
+  if (status.metafile) writeFileSync('meta.json', status.metafile)
 }
 
 build()
