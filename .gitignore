@@ -9,5 +9,7 @@ dist
 meta.json
 node_modules
 package-lock.json
-public
+public/*.css
+public/*.js
+public/*.map
 sample.*
