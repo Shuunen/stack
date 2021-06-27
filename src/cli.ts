@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
+import packageJson from '../package.json'
 import { build } from './build'
-import { dev } from './dev'
 import { help } from './help'
 import { info } from './info'
 import { lint } from './lint'
@@ -9,7 +9,6 @@ import { logger } from './logger'
 import { serve } from './serve'
 import { test } from './test'
 import { update } from './update'
-import packageJson from '../package.json'
 
 async function start () {
   const [command, ...options] = process.argv.slice(2)
@@ -23,7 +22,6 @@ async function start () {
   logger.log(`stack v${packageJson.version} is starting...`)
   if (intent === 'build') return build(options)
   if (intent === 'lint') return lint()
-  if (intent === 'dev') return dev(options)
   if (intent === 'serve') return serve(options[0])
   if (intent === 'test') return test(options[0])
   if (intent === 'update') return update()
