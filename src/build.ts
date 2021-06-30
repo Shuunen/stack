@@ -1,6 +1,7 @@
 import postCssPlugin from '@deanc/esbuild-plugin-postcss'
 import { build as esbuild, Format, Platform } from 'esbuild'
 import { writeFileSync } from 'fs'
+import atImport from 'postcss-import'
 import tailwindcss from 'tailwindcss'
 import { runPlugin } from './build-run-plugin'
 import { logger } from './logger'
@@ -23,7 +24,7 @@ export async function build (args: string[]): Promise<void> {
   const doServe = options.includes('--serve')
   const sourcemap = options.includes('--sourcemap') || (isBrowser && doServe)
   const define = (!options.includes('--no-global') && isBrowser) ? { global: 'window' } : {}
-  const plugins = isBrowser ? [postCssPlugin({ plugins: [tailwindcss] })] : []
+  const plugins = isBrowser ? [postCssPlugin({ plugins: [atImport, tailwindcss] })] : []
 
   if (run) plugins.push(runPlugin)
 
