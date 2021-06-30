@@ -4,6 +4,10 @@
     "davidanson.vscode-markdownlint",
     "yzhang.markdown-all-in-one",
     "dbaeumer.vscode-eslint",
-    "bradlc.vscode-tailwindcss"
+    "bradlc.vscode-tailwindcss",
+    "stylelint.vscode-stylelint",
+    "richie5um2.vscode-sort-json",
+    "mrmlnc.vscode-postcss-sorting",
+    "michelemelluso.gitignore"
   ]
 }

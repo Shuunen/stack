@@ -6,7 +6,6 @@
   "bugs": "https://github.com/Shuunen/stack/issues",
   "dependencies": {
     "@deanc/esbuild-plugin-postcss": "1.0.1",
-    "@types/node": "15.12.4",
     "@types/assert": "1.5.4",
     "@types/jsonfile": "6.0.0",
     "@typescript-eslint/eslint-plugin": "4.28.1",
@@ -15,6 +14,9 @@
     "chokidar": "3.5.2",
     "colorette": "1.2.2",
     "esbuild": "0.12.12",
+    "@types/mocha": "8.2.2",
+    "@types/node": "15.12.4",
+    "del": "6.0.0",
     "eslint": "7.29.0",
     "eslint-plugin-html": "6.1.2",
     "eslint-plugin-mocha": "9.0.0",
@@ -58,7 +60,7 @@
     "prebuild": "rm dist -rf",
     "preversion": "npm run ci",
     "start": "ts-node src/cli",
-    "test": "echo no tests yet",
+    "test": "nyc mocha",
     "update": "npx npm-check-updates -u"
   },
   "version": "0.10.0"
