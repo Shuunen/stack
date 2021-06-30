@@ -5,7 +5,7 @@ import tailwindcss from 'tailwindcss'
 import { runPlugin } from './build-run-plugin'
 import { logger } from './logger'
 import { serve } from './serve'
-import { exitWithError, untilUserStop } from './utils'
+import { untilUserStop } from './utils'
 
 export async function build (args: string[]): Promise<void> {
 
@@ -18,6 +18,7 @@ export async function build (args: string[]): Promise<void> {
   const format = String((/--format[\s=](\S*)/.exec(options) ?? [undefined, isBrowser ? 'iife' : 'cjs'])[1]) as Format
   const minify = !options.includes('--no-minify')
   const watch = options.includes('--watch')
+  const quiet = options.includes('--quiet')
   const metafile = options.includes('--meta')
   const doServe = options.includes('--serve')
   const sourcemap = options.includes('--sourcemap') || (isBrowser && doServe)
@@ -26,6 +27,7 @@ export async function build (args: string[]): Promise<void> {
 
   if (run) plugins.push(runPlugin)
 
+  /* istanbul ignore next */
   if (doServe) serve(outDirectory).catch(error => logger.error(error))
 
   const config = {
@@ -44,11 +46,13 @@ export async function build (args: string[]): Promise<void> {
   logger.debug('build options', options)
   logger.debug('esbuild config', config)
   const status = await esbuild(config)
-
-  if (status.errors.length > 0) exitWithError(status.errors)
-  if (status.warnings.length > 0) logger.log('compilation ended with warnings :', status.warnings)
+  /* istanbul ignore next */
+  if (status.errors.length > 0) throw new Error(status.errors[0].text)
+  /* istanbul ignore next */
+  if (status.warnings.length > 0 && !quiet) logger.log('compilation ended with warnings :', status.warnings)
+  /* istanbul ignore next */
   else if (watch) return untilUserStop()
-  logger.log('\ncompilation ended successfully')
+  if (!quiet) logger.log('\ncompilation ended successfully')
   if (status.metafile) writeFileSync('meta.json', JSON.stringify(status.metafile))
 }
 

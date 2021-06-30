@@ -1,6 +1,6 @@
 import { green, red } from 'colorette'
 
-const nothing = (stuff: unknown[] = []) => {
+const nothing = (stuff: unknown[]) => {
   if (stuff.length === 0) return true
   if (stuff.length === 1 && (typeof stuff[0] === 'string' && stuff[0].trim().length === 0)) return true
   return false
