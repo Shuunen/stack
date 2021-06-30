@@ -7,7 +7,6 @@
 
 ## Todos
 
-- [ ] add tests to this repo
 - [ ] eslint-plugin-standard ?
 - [ ] eslint-plugin-node ?
 - [ ] eslint-plugin-import ?
