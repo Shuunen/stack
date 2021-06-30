@@ -63,5 +63,5 @@
     "test": "nyc mocha",
     "update": "npx npm-check-updates -u"
   },
-  "version": "0.10.0"
+  "version": "0.10.1"
 }
