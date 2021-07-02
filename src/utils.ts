@@ -13,8 +13,8 @@ export const execFile = (...args: string[]): void => {
   const exists = existsSync(args[0])
   if (!exists) return logger.error('file does not exists :', args[0])
   const child = spawn('node', args)
-  child.stdout.on('data', data => logger.log(String(data).trim()))
-  child.stderr.on('data', data => logger.error(String(data).trim()))
+  child.stdout.on('data', /* istanbul ignore next */ data => logger.log(String(data).trim()))
+  child.stderr.on('data', /* istanbul ignore next */ data => logger.error(String(data).trim()))
 }
 
 export const asyncExec = async (cmd: string, showLog = true, showError = true): Promise<{ code: number, out: string }> => new Promise((resolve, reject) => {
