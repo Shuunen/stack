@@ -1,5 +1,5 @@
-import postCssPlugin from '@deanc/esbuild-plugin-postcss'
 import { build as esbuild, Format, Platform } from 'esbuild'
+import postCssPlugin from 'esbuild-plugin-postcss2/dist'
 import { writeFileSync } from 'fs'
 import atImport from 'postcss-import'
 import tailwindcss from 'tailwindcss'

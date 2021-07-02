@@ -1,4 +1,3 @@
-declare module '@deanc/esbuild-plugin-postcss'
 declare module 'servor/servor.js'
 declare module 'servor/utils/openBrowser.js'
 

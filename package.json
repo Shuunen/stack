@@ -5,7 +5,6 @@
   },
   "bugs": "https://github.com/Shuunen/stack/issues",
   "dependencies": {
-    "@deanc/esbuild-plugin-postcss": "1.0.1",
     "@types/assert": "1.5.4",
     "@types/jsonfile": "6.0.0",
     "@types/mocha": "8.2.2",
@@ -17,6 +16,7 @@
     "colorette": "1.2.2",
     "del": "6.0.0",
     "esbuild": "0.12.12",
+    "esbuild-plugin-postcss2": "0.0.9",
     "eslint": "7.29.0",
     "eslint-plugin-html": "6.1.2",
     "eslint-plugin-mocha": "9.0.0",
