@@ -5,7 +5,7 @@
   },
   "bugs": "https://github.com/Shuunen/stack/issues",
   "dependencies": {
-    "@types/assert": "1.5.4",
+    "@types/assert": "1.5.5",
     "@types/jsonfile": "6.0.0",
     "@types/mocha": "8.2.2",
     "@types/node": "15.12.4",
