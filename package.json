@@ -31,7 +31,7 @@
     "servor": "4.0.2",
     "shuutils": "4.6.1",
     "tailwindcss": "2.2.4",
-    "ts-node": "10.0.0",
+    "ts-node": "10.1.0",
     "typescript": "4.3.5"
   },
   "description": "A cli to help me build web things, all in one",
